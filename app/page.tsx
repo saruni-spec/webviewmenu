@@ -1,6 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+
+// Service URL mappings - maps service names to their external URLs
+// {{phone}} will be replaced with the actual phone number
+const SERVICE_URLS: Record<string, string> = {
+  // eTIMS Invoicing
+  "Sales Invoice": "https://f88-xslk.vercel.app/etims/auth?number={{phone}}",
+  "Credit Note": "https://f88-xslk.vercel.app/etims/auth?number={{phone}}",
+  "Buyer-Initiated Invoices": "https://f88-xslk.vercel.app/etims/auth?number={{phone}}",
+  
+  // Return Filing
+  "NIL Filing": "https://nil-mri-tot.vercel.app/nil/validation?phone={{phone}}",
+  "Monthly Rental Income (MRI)": "https://nil-mri-tot.vercel.app/mri/validation?phone={{phone}}",
+  "Turnover Tax (TOT)": "https://nil-mri-tot.vercel.app/tot/validation?phone={{phone}}",
+  
+  // PIN Services
+  "PIN Registration": "https://pin-registration.vercel.app?phone={{phone}}",
+  
+  // Customs Services
+  "Passenger Declaration (F88)": "https://f88-web.vercel.app?phone={{phone}}",
+};
 
 // Service Data derived from user screenshots
 const SERVICE_CATEGORIES = [
@@ -77,13 +98,43 @@ const SERVICE_CATEGORIES = [
 
 import { Layout } from "@/app/_components/Layout";
 
-export default function Home() {
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const phone = searchParams.get("phone") || "";
+  const [toast, setToast] = useState<string | null>(null);
+
+  const handleServiceClick = (serviceName: string) => {
+    const urlTemplate = SERVICE_URLS[serviceName];
+    
+    if (urlTemplate) {
+      // Replace {{phone}} with actual phone number and navigate
+      const url = urlTemplate.replace("{{phone}}", phone);
+      window.location.href = url;
+    } else {
+      // Show "coming soon" toast for services not yet available
+      setToast(`${serviceName} - Coming Soon`);
+      setTimeout(() => setToast(null), 3000);
+    }
+  };
+
+  // Check if a service has a URL configured
+  const isServiceAvailable = (serviceName: string) => {
+    return serviceName in SERVICE_URLS;
+  };
+
   return (
     <Layout
       title="KRA Services"
       showMenu={true}
       // onBack is undefined because this is the home page
     >
+      {/* Toast notification */}
+      {toast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm animate-fade-in">
+          {toast}
+        </div>
+      )}
+
       <div className="mb-4 rounded-md bg-blue-50 p-3 text-sm text-blue-700">
         Select a service below to continue.
       </div>
@@ -103,13 +154,17 @@ export default function Home() {
               {category.items.map((item, itemIndex) => (
                 <button
                   key={itemIndex}
-                  className={`rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 hover:border-gray-300 transition-colors ${
-                    item === "See More (+1)"
-                      ? "text-blue-600 bg-blue-50 border-blue-100 hover:bg-blue-100"
-                      : ""
+                  onClick={() => handleServiceClick(item)}
+                  className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
+                    isServiceAvailable(item)
+                      ? "border-green-200 bg-green-50 text-green-700 hover:bg-green-100 hover:border-green-300"
+                      : "border-gray-200 bg-gray-50 text-gray-500 hover:bg-gray-100 hover:border-gray-300"
                   }`}
                 >
                   {item}
+                  {isServiceAvailable(item) && (
+                    <span className="ml-1 text-green-500">→</span>
+                  )}
                 </button>
               ))}
             </div>
@@ -117,5 +172,13 @@ export default function Home() {
         ))}
       </div>
     </Layout>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
