@@ -55,7 +55,7 @@ export function Layout({ children, title, step, onBack, showMenu = false, showHe
               )}
               <div>
                 <h1 className="text-base font-medium">{title}</h1>
-                {step && <p className="text-xs text-gray-400">{step}</p>}
+                {step && <p className="text-[10px] text-gray-400">{step}</p>}
               </div>
             </div>
             {showMenu && (
