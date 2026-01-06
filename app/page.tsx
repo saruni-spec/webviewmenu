@@ -24,6 +24,7 @@ const SERVICE_URLS: Record<string, string> = {
   "e-Slip Payment": "https://payments-rho-seven.vercel.app?phone={{phone}}",
   "NITA": "https://payments-rho-seven.vercel.app?phone={{phone}}",
   "Affordable Housing Levy": "https://payments-rho-seven.vercel.app?phone={{phone}}",
+  "TCC Application": "https://tcc-seven-psi.vercel.app?phone={{phone}}",
   
 };
 
