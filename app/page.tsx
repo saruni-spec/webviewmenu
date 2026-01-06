@@ -27,90 +27,82 @@ const SERVICE_URLS: Record<string, string> = {
   "TCC Application": "https://tcc-seven-psi.vercel.app?phone={{phone}}",
 };
 
-// Compact service data with icons and short labels
+// Service categories with clearer labels
 const SERVICE_CATEGORIES = [
   {
-    title: "PIN",
-    icon: "🆔",
+    title: "PIN Services",
     items: [
-      { label: "Register", key: "PIN Registration" },
-      { label: "Retrieve", key: "PIN Retrieve" },
-      { label: "Change", key: "PIN Change" },
-      { label: "Update", key: "PIN Update" },
+      { label: "Register PIN", key: "PIN Registration" },
+      { label: "Retrieve PIN", key: "PIN Retrieve" },
+      { label: "Change Details", key: "PIN Change" },
+      { label: "Update iTax", key: "PIN Update" },
       { label: "Reactivate", key: "PIN Reactivate" },
       { label: "Obligations", key: "PIN Obligations" },
     ],
   },
   {
-    title: "Filing",
-    icon: "📝",
+    title: "Return Filing",
     items: [
-      { label: "NIL", key: "NIL Filing" },
-      { label: "MRI", key: "MRI" },
-      { label: "TOT", key: "TOT" },
+      { label: "NIL Returns", key: "NIL Filing" },
+      { label: "Rental Income", key: "MRI" },
+      { label: "Turnover Tax", key: "TOT" },
       { label: "PAYE", key: "PAYE" },
       { label: "VAT", key: "VAT" },
-      { label: "Partners", key: "Partnership" },
+      { label: "Partnership", key: "Partnership" },
       { label: "Excise", key: "Excise" },
     ],
   },
   {
-    title: "eTIMS",
-    icon: "🧾",
+    title: "eTIMS Invoicing",
     items: [
-      { label: "Invoice", key: "Sales Invoice" },
+      { label: "Sales Invoice", key: "Sales Invoice" },
       { label: "Credit Note", key: "Credit Note" },
       { label: "Buyer Invoice", key: "Buyer-Initiated Invoices" },
     ],
   },
   {
-    title: "Compliance",
-    icon: "✅",
+    title: "Tax Compliance",
     items: [
-      { label: "TCC Apply", key: "TCC Application" },
-      { label: "TCC Reprint", key: "TCC Reprint" },
+      { label: "Apply for TCC", key: "TCC Application" },
+      { label: "Reprint TCC", key: "TCC Reprint" },
     ],
   },
   {
     title: "Customs",
-    icon: "🛃",
     items: [
-      { label: "F88", key: "F88 Declaration" },
-      { label: "TIMV", key: "TIMV" },
-      { label: "TEMV", key: "TEMV" },
+      { label: "F88 Declaration", key: "F88 Declaration" },
+      { label: "TIMV Cert", key: "TIMV" },
+      { label: "TEMV Cert", key: "TEMV" },
       { label: "Extend TIMV", key: "Extend TIMV" },
       { label: "Forms", key: "Forms" },
-      { label: "Status", key: "Status" },
+      { label: "Track Status", key: "Status" },
     ],
   },
   {
     title: "Payments",
-    icon: "💳",
     items: [
-      { label: "eSlip", key: "eSlip" },
-      { label: "NITA", key: "NITA" },
-      { label: "AHL", key: "AHL" },
+      { label: "eSlip Payment", key: "eSlip" },
+      { label: "NITA Levy", key: "NITA" },
+      { label: "Housing Levy", key: "AHL" },
     ],
   },
   {
-    title: "Verify",
-    icon: "🔍",
+    title: "Verification",
     items: [
-      { label: "PIN", key: "PIN Check" },
-      { label: "Invoice", key: "Invoice Check" },
-      { label: "TCC", key: "TCC Check" },
-      { label: "Staff", key: "Staff Check" },
-      { label: "Station", key: "Station" },
-      { label: "Import", key: "Import Check" },
+      { label: "Check PIN", key: "PIN Check" },
+      { label: "Check Invoice", key: "Invoice Check" },
+      { label: "Check TCC", key: "TCC Check" },
+      { label: "Check Staff", key: "Staff Check" },
+      { label: "Find Station", key: "Station" },
+      { label: "Import Cert", key: "Import Check" },
     ],
   },
   {
-    title: "Other",
-    icon: "📋",
+    title: "Other Services",
     items: [
-      { label: "Refund", key: "Refund" },
-      { label: "Fraud", key: "Report Fraud" },
-      { label: "More", key: "More" },
+      { label: "Refund Application", key: "Refund" },
+      { label: "Report Fraud", key: "Report Fraud" },
+      { label: "View All", key: "More" },
     ],
   },
 ];
@@ -140,41 +132,37 @@ function HomeContent() {
     <Layout title="KRA Services" showMenu={true}>
       {/* Toast */}
       {toast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-800 text-white px-3 py-1.5 rounded-lg shadow-lg text-xs">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm">
           {toast}
         </div>
       )}
 
-      {/* Compact grid */}
-      <div className="space-y-1.5">
+      {/* Service grid */}
+      <div className="space-y-2.5">
         {SERVICE_CATEGORIES.map((category, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg border border-gray-100 p-2"
+            className="bg-white rounded-lg border border-gray-100 p-2.5"
           >
-            {/* Category header - inline with items */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 min-w-[70px]">
-                <span className="text-sm">{category.icon}</span>
-                <span className="text-[10px] font-semibold text-gray-600 uppercase tracking-wide">
-                  {category.title}
-                </span>
-              </div>
+            {/* Category header */}
+            <div className="flex items-start gap-3">
+              <span className="text-xs font-semibold text-gray-700 min-w-[90px] pt-1">
+                {category.title}
+              </span>
               
               {/* Service items */}
-              <div className="flex flex-wrap gap-1 flex-1">
+              <div className="flex flex-wrap gap-1.5 flex-1">
                 {category.items.map((item, itemIndex) => (
                   <button
                     key={itemIndex}
                     onClick={() => handleServiceClick(item.key)}
-                    className={`px-2 py-0.5 text-[10px] font-medium rounded transition-colors ${
+                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                       isAvailable(item.key)
-                        ? "bg-green-100 text-green-700 hover:bg-green-200"
-                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                        ? "bg-green-50 text-green-700 border border-green-200 hover:bg-green-100"
+                        : "bg-gray-50 text-gray-500 border border-gray-200 hover:bg-gray-100"
                     }`}
                   >
                     {item.label}
-                    {isAvailable(item.key) && <span className="ml-0.5">›</span>}
                   </button>
                 ))}
               </div>
@@ -182,8 +170,6 @@ function HomeContent() {
           </div>
         ))}
       </div>
-
-      
     </Layout>
   );
 }
