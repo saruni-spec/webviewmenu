@@ -21,6 +21,10 @@ const SERVICE_URLS: Record<string, string> = {
   
   // Customs Services
   "Passenger Declaration (F88)": "https://f88-web.vercel.app?phone={{phone}}",
+  "e-Slip Payment": "https://payments-rho-seven.vercel.app?phone={{phone}}",
+  "NITA": "https://payments-rho-seven.vercel.app?phone={{phone}}",
+  "Affordable Housing Levy": "https://payments-rho-seven.vercel.app?phone={{phone}}",
+  
 };
 
 // Service Data derived from user screenshots
