@@ -156,7 +156,7 @@ function HomeContent() {
                   <button
                     key={itemIndex}
                     onClick={() => handleServiceClick(item.key)}
-                    className={`px-3 py-1.5 text-[10px] font-medium rounded-md transition-colors ${
+                    className={`px-2.5 py-1 text-[10px] font-medium rounded-md transition-colors ${
                       isAvailable(item.key)
                         ? "bg-green-50 text-green-700 border border-green-200 hover:bg-green-100"
                         : "bg-gray-50 text-gray-500 border border-gray-200 hover:bg-gray-100"
