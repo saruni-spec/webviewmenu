@@ -25,6 +25,12 @@ const SERVICE_URLS: Record<string, string> = {
   "NITA": "https://payments-rho-seven.vercel.app?phone={{phone}}",
   "AHL": "https://payments-rho-seven.vercel.app?phone={{phone}}",
   "TCC Application": "https://tcc-seven-psi.vercel.app?phone={{phone}}",
+  "PIN CHECK": "https://verification-lilac.vercel.app/pin-checker?phone={{phone}}",
+  "Invoice CHECK": "https://verification-lilac.vercel.app/invoice-checker?phone={{phone}}",
+  "TCC CHECK": "https://verification-lilac.vercel.app/tcc-checker?phone={{phone}}",
+  "Staff CHECK": "https://verification-lilac.vercel.app/staff-checker?phone={{phone}}",
+  "Find Station": "https://verification-lilac.vercel.app/know-your-station?phone={{phone}}",
+  "Import Cert": "https://verification-lilac.vercel.app/import-certificate?phone={{phone}}",
 };
 
 // Service categories with clearer labels
