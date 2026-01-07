@@ -21,9 +21,9 @@ const SERVICE_URLS: Record<string, string> = {
   
   // Customs Services
   "F88 Declaration": "https://f88-web.vercel.app?phone={{phone}}",
-  "eSlip": "https://payments-rho-seven.vercel.app?phone={{phone}}",
-  "NITA": "https://payments-rho-seven.vercel.app?phone={{phone}}",
-  "AHL": "https://payments-rho-seven.vercel.app?phone={{phone}}",
+  "eSlip": "https://payments-rho-seven.vercel.app/eslip/payment?phone={{phone}}",
+  "NITA": "https://payments-rho-seven.vercel.app/nita/payment?phone={{phone}}",
+  "AHL": "https://payments-rho-seven.vercel.app/ahl/payment?phone={{phone}}",
   "TCC Application": "https://tcc-seven-psi.vercel.app?phone={{phone}}",
   "PIN Check": "https://verification-lilac.vercel.app/pin-checker?phone={{phone}}",
   "Invoice Check": "https://verification-lilac.vercel.app/invoice-checker?phone={{phone}}",
