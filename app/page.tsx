@@ -12,9 +12,9 @@ const SERVICE_URLS: Record<string, string> = {
   "Buyer-Initiated Invoices": "https://f88-xslk.vercel.app/etims/auth?number={{phone}}",
   
   // Return Filing
-  "NIL Filing": "https://nil-mri-tot.vercel.app/nil/validation?phone={{phone}}",
-  "MRI": "https://nil-mri-tot.vercel.app/mri/validation?phone={{phone}}",
-  "TOT": "https://nil-mri-tot.vercel.app/tot/validation?phone={{phone}}",
+  "NIL Filing": "https://nil-mri-tot.vercel.app/nil-mri-tot/nil/validation?phone={{phone}}",
+  "MRI": "https://nil-mri-tot.vercel.app/nil-mri-tot/mri/validation?phone={{phone}}",
+  "TOT": "https://nil-mri-tot.vercel.app/nil-mri-tot/tot/validation?phone={{phone}}",
   
   // PIN Services
   "PIN Registration": "https://pin-registration.vercel.app?phone={{phone}}",
